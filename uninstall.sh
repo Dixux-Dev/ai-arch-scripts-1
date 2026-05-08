@@ -86,12 +86,18 @@ echo "   ✅ Contenedores eliminados"
 echo ""
 echo "💽 Eliminando volúmenes de datos..."
 
-# Volúmenes nombrados de Chatwoot
-for VOL in chatwoot_postgres_data chatwoot_redis_data chatwoot_storage chatdify_postgres_data; do
+# Volúmenes de Chatwoot
+for VOL in chatwoot_postgres_data chatwoot_redis_data chatwoot_storage; do
     if docker volume inspect "$VOL" &>/dev/null; then
         docker volume rm "$VOL" 2>/dev/null || true
         echo "   🗑️  Volumen eliminado: $VOL"
     fi
+done
+
+# Volúmenes de bridges (uno por bot: chatdify_<slug>_postgres_data)
+for VOL in $(docker volume ls --format "{{.Name}}" 2>/dev/null | grep "chatdify_" || true); do
+    docker volume rm "$VOL" 2>/dev/null || true
+    echo "   🗑️  Volumen eliminado: $VOL"
 done
 
 # Volúmenes del proyecto Dify (prefijo docker_)
@@ -129,6 +135,7 @@ IMAGES=(
     "langgenius/dify-plugin-daemon"
     "langgenius/dify-sandbox"
     "chatwoot/chatwoot"
+    "eremeye/chatdify"
     "cloudflare/cloudflared"
     "pgvector/pgvector"
     "redis:7-alpine"
@@ -174,14 +181,14 @@ else
     echo "   ⚠️  No se encontró: $DIFY_DIR"
 fi
 
-# Eliminar también el directorio chatdify (creado por bridge.sh)
-BRIDGE_DIR="$HOME/chatdify"
-if [ -d "$BRIDGE_DIR" ]; then
-    rm -rf "$BRIDGE_DIR" 2>/dev/null || true
-    if [ ! -d "$BRIDGE_DIR" ]; then
-        echo "   ✅ Eliminado: $BRIDGE_DIR"
+# Eliminar directorio de env files de los bridges (~/.chatdify/*.bot.env)
+BRIDGE_ENVS_DIR="$HOME/chatdify"
+if [ -d "$BRIDGE_ENVS_DIR" ]; then
+    rm -rf "$BRIDGE_ENVS_DIR" 2>/dev/null || true
+    if [ ! -d "$BRIDGE_ENVS_DIR" ]; then
+        echo "   ✅ Eliminado: $BRIDGE_ENVS_DIR"
     else
-        sudo rm -rf "$BRIDGE_DIR" 2>/dev/null || true
+        sudo rm -rf "$BRIDGE_ENVS_DIR" 2>/dev/null || true
     fi
 fi
 
@@ -215,7 +222,7 @@ echo "🔍 Verificación final..."
 REMAINING=$(docker ps -a --format "{{.Names}}" 2>/dev/null \
     | grep -E "chatwoot|dify|cloudflared" || true)
 REMAINING_VOLS=$(docker volume ls --format "{{.Name}}" 2>/dev/null \
-    | grep -E "chatwoot|docker_" || true)
+    | grep -E "chatwoot|docker_|chatdify_" || true)
 REMAINING_NETS=$(docker network ls --format "{{.Name}}" 2>/dev/null \
     | grep -E "app-network|chatwoot-net" || true)
 
@@ -243,6 +250,10 @@ if [ -f "$BACKUP_FILE" ]; then
     echo "   rm $BACKUP_FILE"
     echo ""
 fi
+echo "📁 Archivos del proyecto preservados intencionalmente:"
+echo "   knowledge/   — documentos del cliente (elimina manualmente si no los necesitas)"
+echo "   plugins.list — catálogo de plugins (reutilizable en futuras instalaciones)"
+echo ""
 echo "🖥️  Espacio disponible en disco:"
 df -h / | tail -1 | awk '{print "   " $4 " libres de " $2}'
 echo ""

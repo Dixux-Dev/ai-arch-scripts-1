@@ -1,0 +1,18 @@
+# Catálogo de plugins del Marketplace de Dify
+# Formato: org/nombre|Descripción corta|tipo:campo:provider_path_dify
+# Ref: https://marketplace.dify.ai/plugin/<org>/<nombre>
+#
+# El instalador obtiene siempre la versión más reciente de cada plugin.
+#
+# 3er campo (opcional): configuración automática de credenciales
+#   model:campo:provider_path → model provider (ej. Gemini)
+#   tool:campo:provider_path  → tool provider (ej. Tavily, DALL-E)
+#   Sin 3er campo             → no requiere credenciales (Wikipedia, Agent)
+#
+# provider_path = org/plugin/provider_name (formato interno de Dify)
+
+langgenius/tavily|Búsqueda web en tiempo real (Tavily)|tool:tavily_api_key:langgenius/tavily/tavily
+langgenius/wikipedia|Wikipedia — consultar artículos|
+langgenius/dalle|Generar imágenes (DALL-E)|tool:openai_api_key:langgenius/dalle/dalle
+langgenius/agent|Agent Strategies (Function Calling + ReAct)|
+langgenius/gemini|Google Gemini — modelos de lenguaje de Google|model:google_api_key:langgenius/gemini/google

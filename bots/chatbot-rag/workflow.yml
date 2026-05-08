@@ -1,0 +1,872 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: New Chatbot
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.7.20@de0063a630a6d1b2c025fb84f3462ba5151fb60618309cd595c3f4711b1df847
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: spance/db_client_node:0.1.47@60965f21262129b75b2e01543190ab65021b75b55441532f77f88fcd7b71095d
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables:
+  - description: ''
+    id: ca12acd8-43d4-4a28-ae0c-9cfac2e725ba
+    name: name
+    selector:
+    - conversation
+    - name
+    value: ''
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: if-else
+      id: 1776100579667-source-1776100847499-target
+      selected: false
+      source: '1776100579667'
+      sourceHandle: source
+      target: '1776100847499'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1776100847499-true-1776166573456-target
+      source: '1776100847499'
+      sourceHandle: 'true'
+      target: '1776166573456'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: if-else
+      id: 1776166573456-source-1776113533678-target
+      source: '1776166573456'
+      sourceHandle: source
+      target: '1776113533678'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1776113533678-false-1776191340767-target
+      source: '1776113533678'
+      sourceHandle: 'false'
+      target: '1776191340767'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1776113533678-true-1776192289346-target
+      source: '1776113533678'
+      sourceHandle: 'true'
+      target: '1776192289346'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1776192289346-source-1776192838908-target
+      source: '1776192289346'
+      sourceHandle: source
+      target: '1776192838908'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1776192838908-true-1776191841892-target
+      source: '1776192838908'
+      sourceHandle: 'true'
+      target: '1776191841892'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1776100847499-false-1776197945307-target
+      source: '1776100847499'
+      sourceHandle: 'false'
+      target: '1776197945307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: knowledge-retrieval
+      id: 1776191340767-source-1776197945307-target
+      source: '1776191340767'
+      sourceHandle: source
+      target: '1776197945307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: knowledge-retrieval
+      id: 1776191841892-source-1776197945307-target
+      source: '1776191841892'
+      sourceHandle: source
+      target: '1776197945307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: agent
+      id: 1776197945307-source-1776419032904-target
+      source: '1776197945307'
+      sourceHandle: source
+      target: '1776419032904'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: User Input
+        type: start
+        variables: []
+      height: 72
+      id: '1776100579667'
+      position:
+        x: 0
+        y: 232
+      positionAbsolute:
+        x: 0
+        y: 232
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 6bc5d37d-a505-4085-a875-c0c0cdc31dcd
+            value: '1'
+            varType: number
+            variable_selector:
+            - sys
+            - dialogue_count
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: First Round?
+        type: if-else
+      height: 123
+      id: '1776100847499'
+      position:
+        x: 342
+        y: 206
+      positionAbsolute:
+        x: 342
+        y: 206
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 19456e0e-0057-4183-a6d4-133f7db3e3de
+            numberVarType: constant
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1776166573456'
+            - data
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: User Exist?
+        type: if-else
+      height: 123
+      id: '1776113533678'
+      position:
+        x: 1046
+        y: 95
+      positionAbsolute:
+        x: 1046
+        y: 95
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_team_authorization: false
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            ja_JP: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            pt_BR: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            zh_Hans: 要执行的SQL查询（参数使用变量`$arg0~N`表示，或使用字面值）
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL查询
+          llm_description: ''
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg0
+            ja_JP: arg0
+            pt_BR: arg0
+            zh_Hans: 参数0
+          llm_description: ''
+          max: null
+          min: null
+          name: arg0
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg1
+            ja_JP: arg1
+            pt_BR: arg1
+            zh_Hans: 参数1
+          llm_description: ''
+          max: null
+          min: null
+          name: arg1
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg2
+            ja_JP: arg2
+            pt_BR: arg2
+            zh_Hans: 参数2
+          llm_description: ''
+          max: null
+          min: null
+          name: arg2
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg3
+            ja_JP: arg3
+            pt_BR: arg3
+            zh_Hans: 参数3
+          llm_description: ''
+          max: null
+          min: null
+          name: arg3
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg4
+            ja_JP: arg4
+            pt_BR: arg4
+            zh_Hans: 参数4
+          llm_description: ''
+          max: null
+          min: null
+          name: arg4
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          arg0: ''
+          arg1: ''
+          arg2: ''
+          arg3: ''
+          arg4: ''
+          query: ''
+        plugin_id: spance/db_client_node
+        plugin_unique_identifier: spance/db_client_node:0.1.47@60965f21262129b75b2e01543190ab65021b75b55441532f77f88fcd7b71095d
+        provider_icon: https://dify-test.bpz.com.mx/console/api/workspaces/current/plugin/icon?tenant_id=ba57f196-4b3a-415c-84ac-3be3011d7366&filename=6b7847477266026620c1046288e6674d42cfb55ccca6335d26475489ade16071.svg
+        provider_id: spance/db_client_node/db_client_node
+        provider_name: spance/db_client_node/db_client_node
+        provider_type: builtin
+        selected: false
+        title: Get User
+        tool_configurations: {}
+        tool_description: PostgreSQL Client
+        tool_label: PostgreSQL Client(5)
+        tool_name: postgres_node_5
+        tool_node_version: '2'
+        tool_parameters:
+          arg0:
+            type: mixed
+            value: '{{#sys.user_id#}}'
+          arg1:
+            type: mixed
+            value: null
+          arg2:
+            type: mixed
+            value: null
+          arg3:
+            type: mixed
+            value: null
+          arg4:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: SELECT id, nombre, email, telefono, booking_id FROM usuarios WHERE
+              channel_id=$arg0
+        type: tool
+      height: 51
+      id: '1776166573456'
+      position:
+        x: 704
+        y: 130.00375452403543
+      positionAbsolute:
+        x: 704
+        y: 130.00375452403543
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_team_authorization: true
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            ja_JP: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            pt_BR: The SQL query to execute (allow literal arg, or `$arg0~N` as parameters)
+            zh_Hans: 要执行的SQL查询（参数使用变量`$arg0~N`表示，或使用字面值）
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL查询
+          llm_description: ''
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg0
+            ja_JP: arg0
+            pt_BR: arg0
+            zh_Hans: 参数0
+          llm_description: ''
+          max: null
+          min: null
+          name: arg0
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg1
+            ja_JP: arg1
+            pt_BR: arg1
+            zh_Hans: 参数1
+          llm_description: ''
+          max: null
+          min: null
+          name: arg1
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg2
+            ja_JP: arg2
+            pt_BR: arg2
+            zh_Hans: 参数2
+          llm_description: ''
+          max: null
+          min: null
+          name: arg2
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg3
+            ja_JP: arg3
+            pt_BR: arg3
+            zh_Hans: 参数3
+          llm_description: ''
+          max: null
+          min: null
+          name: arg3
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Enter the parameter corresponding to the SQL variables.
+            ja_JP: Enter the parameter corresponding to the SQL variables.
+            pt_BR: Enter the parameter corresponding to the SQL variables.
+            zh_Hans: 输入变量对应的参数。
+          label:
+            en_US: arg4
+            ja_JP: arg4
+            pt_BR: arg4
+            zh_Hans: 参数4
+          llm_description: ''
+          max: null
+          min: null
+          name: arg4
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          arg0: ''
+          arg1: ''
+          arg2: ''
+          arg3: ''
+          arg4: ''
+          query: ''
+        plugin_id: spance/db_client_node
+        plugin_unique_identifier: spance/db_client_node:0.1.47@60965f21262129b75b2e01543190ab65021b75b55441532f77f88fcd7b71095d
+        provider_icon: https://dify-test.bpz.com.mx/console/api/workspaces/current/plugin/icon?tenant_id=ba57f196-4b3a-415c-84ac-3be3011d7366&filename=6b7847477266026620c1046288e6674d42cfb55ccca6335d26475489ade16071.svg
+        provider_id: spance/db_client_node/db_client_node
+        provider_name: spance/db_client_node/db_client_node
+        provider_type: builtin
+        selected: false
+        title: Save New User
+        tool_configurations: {}
+        tool_description: PostgreSQL Client
+        tool_label: PostgreSQL Client(5)
+        tool_name: postgres_node_5
+        tool_node_version: '2'
+        tool_parameters:
+          arg0:
+            type: mixed
+            value: '{{#sys.user_id#}}'
+          arg1:
+            type: mixed
+            value: null
+          arg2:
+            type: mixed
+            value: null
+          arg3:
+            type: mixed
+            value: null
+          arg4:
+            type: mixed
+            value: null
+          query:
+            type: mixed
+            value: INSERT INTO usuarios (channel_id) VALUES ($arg0)
+        type: tool
+      height: 51
+      id: '1776191340767'
+      position:
+        x: 1423.2102600493358
+        y: 155.04324891678007
+      positionAbsolute:
+        x: 1423.2102600493358
+        y: 155.04324891678007
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1776192289346'
+          - nombre
+          variable_selector:
+          - conversation
+          - name
+          write_mode: over-write
+        selected: false
+        title: Variable Assigner
+        type: assigner
+        version: '2'
+      height: 83
+      id: '1776191841892'
+      position:
+        x: 2052
+        y: -49.00000000000014
+      positionAbsolute:
+        x: 2052
+        y: -49.00000000000014
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(db_json: list) -> dict:\n    try:\n        val = db_json[0][\"\
+          data\"][0][\"nombre\"]\n        nombre = \"\" if val is None else str(val)\n\
+          \    except:\n        nombre = \"error\"\n    return {\"nombre\": nombre}"
+        code_language: python3
+        outputs:
+          nombre:
+            children: null
+            type: string
+        selected: false
+        title: Code
+        type: code
+        variables:
+        - value_selector:
+          - '1776166573456'
+          - json
+          value_type: array[object]
+          variable: db_json
+      height: 51
+      id: '1776192289346'
+      position:
+        x: 1392.2857142857144
+        y: -84.42857142857162
+      positionAbsolute:
+        x: 1392.2857142857144
+        y: -84.42857142857162
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: b05bbcfa-0671-4fcc-859c-409bac136af3
+            value: ''
+            varType: string
+            variable_selector:
+            - '1776192289346'
+            - nombre
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: Is the Name Saved?
+        type: if-else
+      height: 123
+      id: '1776192838908'
+      position:
+        x: 1707.1428571428569
+        y: -84.42857142857162
+      positionAbsolute:
+        x: 1707.1428571428569
+        y: -84.42857142857162
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - 6Is6a/TsbMy7B+d/zOKrhIV20Q7ZBcTe/RcY7Zaj/A81o5DOyMQPGvZNtRIieeJ9
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: weighted_score
+          score_threshold: 0.8
+          top_k: 5
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: gemini-embedding-001
+              embedding_provider_name: langgenius/gemini/google
+              vector_weight: 0.7
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1776100579667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: Knowledge Retrieval
+        type: knowledge-retrieval
+      height: 89
+      id: '1776197945307'
+      position:
+        x: 2408.619736550826
+        y: 290.7826140927114
+      positionAbsolute:
+        x: 2408.619736550826
+        y: 290.7826140927114
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        agent_parameters:
+          context:
+            type: variable
+            value:
+            - '1776197945307'
+            - result
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gemini-3.1-pro-preview-customtools
+              model_type: llm
+              provider: langgenius/gemini/google
+              type: model-selector
+          query:
+            type: constant
+            value: ''
+          tools:
+            type: constant
+            value: []
+        agent_strategy_label: FunctionCalling
+        agent_strategy_name: function_calling
+        agent_strategy_provider_name: langgenius/agent/agent
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          window:
+            enabled: false
+            size: 50
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: {}
+        plugin_unique_identifier: langgenius/agent:0.0.34@4b41a374567eb7cb226ee2f851513794566956008f1166c63205efc921be72d8
+        selected: true
+        title: Agent
+        tool_node_version: '2'
+        type: agent
+      height: 135
+      id: '1776419032904'
+      position:
+        x: 2770.5396028981036
+        y: 263.3193420168759
+      positionAbsolute:
+        x: 2770.5396028981036
+        y: 263.3193420168759
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 147.28226744471192
+      y: 457.6556746667005
+      zoom: 0.3298769776932236
+  rag_pipeline_variables: []
